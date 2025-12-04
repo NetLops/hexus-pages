@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTURE — NEXUS Magazine</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        .future-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--primary-dark);
+            padding: 100px 4rem 4rem;
+        }
+        
+        .stars-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .horizon-line {
+            position: absolute;
+            bottom: 30%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        }
+        
+        .grid-floor {
+            position: absolute;
+            bottom: 0;
+            left: -50%;
+            right: -50%;
+            height: 30%;
+            background: 
+                linear-gradient(to top, var(--primary-dark), transparent),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 49px,
+                    rgba(0, 245, 255, 0.1) 50px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 49px,
+                    rgba(0, 245, 255, 0.1) 50px
+                );
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: top;
+        }
+        
+        .future-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .year-display {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 15rem;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            background: var(--gradient-holographic);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-shift 5s ease infinite;
+            margin-bottom: 1rem;
+        }
+        
+        .future-tagline {
+            font-size: 1rem;
+            letter-spacing: 0.5em;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+        
+        .future-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            line-height: 0.95;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+        
+        .future-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .future-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 2px solid var(--text-white);
+            color: var(--text-white);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .future-cta:hover {
+            background: var(--text-white);
+            color: var(--primary-dark);
+        }
+        
+        .future-cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .future-cta:hover svg {
+            transform: translateX(5px);
+        }
+        
+        .timeline-section {
+            padding: 6rem 4rem;
+            background: var(--secondary-dark);
+            position: relative;
+        }
+        
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .timeline-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-line {
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--accent-cyan), transparent);
+            margin: 0 auto;
+        }
+        
+        .articles-section {
+            padding: 4rem;
+            background: var(--primary-dark);
+        }
+        
+        @media (max-width: 900px) {
+            .year-display { font-size: 8rem; }
+            .future-title { font-size: 4rem; }
+            .future-hero { padding: 100px 2rem 4rem; }
+        }
+        
+        @media (max-width: 600px) {
+            .year-display { font-size: 5rem; }
+            .future-title { font-size: 2.5rem; }
+            .future-tagline { letter-spacing: 0.2em; font-size: 0.8rem; }
+            .articles-section { padding: 2rem; }
+            .timeline-section { padding: 4rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">NEXUS<span class="holographic">_</span></a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span class="hamburger"></span>
+        </button>
+        <div class="nav-links">
+            <a href="category-tech.html" class="nav-link">TECH</a>
+            <a href="category-ai.html" class="nav-link">AI</a>
+            <a href="category-gadgets.html" class="nav-link">GADGETS</a>
+            <a href="category-future.html" class="nav-link holographic">FUTURE</a>
+            <a href="index.html#subscribe" class="nav-link holographic-btn">SUBSCRIBE</a>
+        </div>
+    </nav>
+
+    <section class="future-hero">
+        <div class="stars-container" id="stars"></div>
+        <div class="horizon-line"></div>
+        <div class="grid-floor"></div>
+        <div class="future-content">
+            <div class="year-display">2050</div>
+            <p class="future-tagline">What Awaits Humanity</p>
+            <h1 class="future-title">THE<br>FUTURE</h1>
+            <p class="future-subtitle">Space exploration, transhumanism, singularity, and the radical transformations that will redefine what it means to be human.</p>
+            <a href="#articles" class="future-cta">
+                EXPLORE
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="timeline-header">
+            <h2 class="timeline-title">VISIONS OF TOMORROW</h2>
+            <div class="timeline-line"></div>
+        </div>
+    </section>
+
+    <section id="articles" class="articles-section">
+        <div class="masonry-grid">
+            <a href="article-quantum-computing.html" class="card-link">
+                <article class="card card-large">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800" alt="Quantum Computer">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">QUANTUM</span>
+                        <h2>The Rise of Quantum Computing</h2>
+                        <p>How the next generation of processors will reshape reality.</p>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-mars-colony.html" class="card-link">
+                <article class="card card-medium">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="Mars">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">SPACE</span>
+                        <h3>Mars Colony Alpha: First 100 Days</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-singularity.html" class="card-link">
+                <article class="card card-small">
+                    <div class="card-content brutal-bg">
+                        <span class="tag">OPINION</span>
+                        <h3>Why We Should Fear The Singularity</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-digital-twins.html" class="card-link">
+                <article class="card card-large">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" alt="Digital Twin">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">IMMORTALITY</span>
+                        <h2>Digital Twins: Your Virtual Self Lives Forever</h2>
+                        <p>The technology that creates immortal AI copies of consciousness.</p>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-space-tourism.html" class="card-link">
+                <article class="card card-medium">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600" alt="Space">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">TRAVEL</span>
+                        <h3>Space Tourism: Hotels Among the Stars</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-cybernetic-enhancement.html" class="card-link">
+                <article class="card card-small">
+                    <div class="card-content brutal-bg-alt">
+                        <span class="tag">AUGMENTATION</span>
+                        <h3>Human 2.0: Cybernetic Enhancement</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-fusion-power.html" class="card-link">
+                <article class="card card-medium">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1569396116180-90a95a9d3abe?w=600" alt="Fusion">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">ENERGY</span>
+                        <h3>Fusion Power: Unlimited Clean Energy</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-space-weapons.html" class="card-link">
+                <article class="card card-large">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=800" alt="Space Defense">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">DEFENSE</span>
+                        <h2>Space Force: Satellites Become Weapons</h2>
+                        <p>The militarization of orbit and the future of warfare.</p>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-humanoid-workers.html" class="card-link">
+                <article class="card card-small">
+                    <div class="card-content brutal-bg">
+                        <span class="tag">ROBOTICS</span>
+                        <h3>Humanoid Workers: The Labor Revolution</h3>
+                    </div>
+                </article>
+            </a>
+
+            <article class="card card-small iridescent-card">
+                <div class="card-content">
+                    <span class="big-number">2045</span>
+                    <p>predicted year of singularity</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">NEXUS<span class="holographic">_</span></div>
+            <p>© 2025 NEXUS TECH MAGAZINE. ALL RIGHTS RESERVED.</p>
+        </div>
+        <div class="footer-grid-lines"></div>
+    </footer>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 70 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
+            starsContainer.appendChild(star);
+        }
+        
+        // Nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('nav-open');
+            navToggle.classList.toggle('active');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

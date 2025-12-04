@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI — NEXUS Magazine</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        .ai-hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #1a0a2e 0%, var(--primary-dark) 70%);
+            padding-top: 100px;
+        }
+        
+        .neural-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .ai-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid var(--accent-magenta);
+            color: var(--accent-magenta);
+            margin-bottom: 2rem;
+        }
+        
+        .ai-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-magenta);
+            border-radius: 50%;
+            animation: pulse-dot 1.5s ease infinite;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+        
+        .ai-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14rem;
+            line-height: 0.85;
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .ai-title span {
+            display: inline-block;
+            animation: glitch 2s ease infinite;
+        }
+        
+        .ai-title span:nth-child(1) { animation-delay: 0s; }
+        .ai-title span:nth-child(2) { animation-delay: 0.1s; }
+        
+        @keyframes glitch {
+            0%, 90%, 100% { 
+                text-shadow: none;
+                transform: translate(0);
+            }
+            92% { 
+                text-shadow: -2px 0 var(--accent-magenta), 2px 0 var(--accent-cyan);
+                transform: translate(-2px, 1px);
+            }
+            94% { 
+                text-shadow: 2px 0 var(--accent-magenta), -2px 0 var(--accent-cyan);
+                transform: translate(2px, -1px);
+            }
+            96% { 
+                text-shadow: none;
+                transform: translate(0);
+            }
+        }
+        
+        .ai-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .ai-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-holographic);
+            background-size: 200% 100%;
+            animation: holographic-shift 3s ease infinite;
+        }
+        
+        .metric-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--text-gray);
+            text-transform: uppercase;
+        }
+        
+        .articles-section {
+            padding: 4rem;
+            background: var(--primary-dark);
+        }
+        
+        .section-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .section-line {
+            width: 100px;
+            height: 2px;
+            background: var(--accent-magenta);
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 900px) {
+            .ai-title { font-size: 8rem; }
+            .ai-metrics { gap: 1.5rem; }
+            .metric-card { min-width: 140px; padding: 1.5rem; }
+        }
+        
+        @media (max-width: 600px) {
+            .ai-title { font-size: 5rem; }
+            .ai-hero { min-height: 60vh; }
+            .articles-section { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">NEXUS<span class="holographic">_</span></a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span class="hamburger"></span>
+        </button>
+        <div class="nav-links">
+            <a href="category-tech.html" class="nav-link">TECH</a>
+            <a href="category-ai.html" class="nav-link" style="color: var(--accent-magenta);">AI</a>
+            <a href="category-gadgets.html" class="nav-link">GADGETS</a>
+            <a href="category-future.html" class="nav-link">FUTURE</a>
+            <a href="index.html#subscribe" class="nav-link holographic-btn">SUBSCRIBE</a>
+        </div>
+    </nav>
+
+    <section class="ai-hero">
+        <canvas class="neural-canvas" id="neuralCanvas"></canvas>
+        <div class="ai-content">
+            <span class="ai-badge">ARTIFICIAL INTELLIGENCE</span>
+            <h1 class="ai-title"><span>A</span><span>I</span></h1>
+            <p class="ai-subtitle">Machine learning, neural networks, and the algorithms reshaping human existence. Explore the minds we're building.</p>
+            <div class="ai-metrics">
+                <div class="metric-card">
+                    <div class="metric-value">99.7%</div>
+                    <div class="metric-label">Diagnostic Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2.1B</div>
+                    <div class="metric-label">Daily Queries</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">47%</div>
+                    <div class="metric-label">Jobs Automated</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="articles-section">
+        <div class="section-header">
+            <h2 class="section-title">EXPLORE AI</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="masonry-grid">
+            <a href="article-neural-networks.html" class="card-link">
+                <article class="card card-large">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800" alt="Neural Network">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">DEEP LEARNING</span>
+                        <h2>Neural Networks Achieve Consciousness Milestone</h2>
+                        <p>Scientists report breakthrough in self-aware machine learning systems.</p>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-ai-doctors.html" class="card-link">
+                <article class="card card-medium">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600" alt="AI Medicine">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">HEALTH</span>
+                        <h3>AI Doctors Outperform Humans in Trials</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-predictive-algorithm.html" class="card-link">
+                <article class="card card-small">
+                    <div class="card-content brutal-bg-alt">
+                        <span class="tag">ANALYTICS</span>
+                        <h3>The Algorithm That Predicts Everything</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-ai-artists.html" class="card-link">
+                <article class="card card-large">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800" alt="AI Art">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">CULTURE</span>
+                        <h2>AI Artists Win Major Awards: Is Creativity Dead?</h2>
+                        <p>The controversial intersection of machine learning and human expression.</p>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-ai-tutors.html" class="card-link">
+                <article class="card card-medium">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600" alt="AI Education">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">EDUCATION</span>
+                        <h3>AI Tutors Replace Traditional Schools</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-ai-music.html" class="card-link">
+                <article class="card card-small">
+                    <div class="card-content brutal-bg">
+                        <span class="tag">AUDIO</span>
+                        <h3>AI Music: Hits Written in Seconds</h3>
+                    </div>
+                </article>
+            </a>
+
+            <article class="card card-small iridescent-card">
+                <div class="card-content">
+                    <span class="big-number">175B</span>
+                    <p>parameters in latest models</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">NEXUS<span class="holographic">_</span></div>
+            <p>© 2025 NEXUS TECH MAGAZINE. ALL RIGHTS RESERVED.</p>
+        </div>
+        <div class="footer-grid-lines"></div>
+    </footer>
+
+    <script>
+        // Neural network animation
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        
+        const nodes = [];
+        const nodeCount = 50;
+        
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                radius: Math.random() * 2 + 1
+            });
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw connections
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(255, 0, 255, ${0.3 * (1 - dist / 150)})`;
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            // Draw and update nodes
+            nodes.forEach(node => {
+                node.x += node.vx;
+                node.y += node.vy;
+                
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 0, 255, 0.8)';
+                ctx.fill();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        animate();
+        
+        // Nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('nav-open');
+            navToggle.classList.toggle('active');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+</body>
+</html>

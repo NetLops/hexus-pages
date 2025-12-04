@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GADGETS — NEXUS Magazine</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        .gadgets-hero {
+            min-height: 80vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+            background: var(--primary-dark);
+            padding-top: 100px;
+        }
+        
+        .gadgets-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+        }
+        
+        .gadgets-right {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--primary-dark) 100%);
+        }
+        
+        .floating-device {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 30px;
+            position: relative;
+            box-shadow: 
+                0 50px 100px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(0, 245, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-device::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: #333;
+            border-radius: 5px;
+        }
+        
+        .floating-device::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            right: 20px;
+            bottom: 40px;
+            background: linear-gradient(180deg, var(--accent-cyan) 0%, var(--accent-magenta) 100%);
+            border-radius: 5px;
+            opacity: 0.8;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateY(-5deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+        
+        .orbit-ring {
+            position: absolute;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 50%;
+            animation: orbit-spin 20s linear infinite;
+        }
+        
+        .orbit-ring:nth-child(1) { width: 500px; height: 500px; }
+        .orbit-ring:nth-child(2) { width: 600px; height: 600px; animation-duration: 25s; animation-direction: reverse; }
+        .orbit-ring:nth-child(3) { width: 700px; height: 700px; animation-duration: 30s; }
+        
+        @keyframes orbit-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .gadgets-label {
+            display: inline-block;
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            font-weight: 700;
+            color: var(--accent-yellow);
+            margin-bottom: 2rem;
+        }
+        
+        .gadgets-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 8rem;
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+        }
+        
+        .gadgets-title .outline {
+            -webkit-text-stroke: 2px var(--text-white);
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .gadgets-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+            max-width: 400px;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .featured-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .featured-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--accent-yellow);
+            transition: all 0.3s ease;
+        }
+        
+        .featured-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            padding-left: 1.5rem;
+        }
+        
+        .featured-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-yellow);
+        }
+        
+        .featured-text {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+        
+        .articles-section {
+            padding: 4rem;
+            background: var(--secondary-dark);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .section-count {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            letter-spacing: 0.15em;
+        }
+        
+        @media (max-width: 900px) {
+            .gadgets-hero { grid-template-columns: 1fr; min-height: auto; }
+            .gadgets-right { min-height: 50vh; }
+            .gadgets-title { font-size: 5rem; }
+            .floating-device { width: 200px; height: 280px; }
+            .orbit-ring { display: none; }
+        }
+        
+        @media (max-width: 600px) {
+            .gadgets-left { padding: 2rem; }
+            .gadgets-title { font-size: 3.5rem; }
+            .articles-section { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">NEXUS<span class="holographic">_</span></a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span class="hamburger"></span>
+        </button>
+        <div class="nav-links">
+            <a href="category-tech.html" class="nav-link">TECH</a>
+            <a href="category-ai.html" class="nav-link">AI</a>
+            <a href="category-gadgets.html" class="nav-link" style="color: var(--accent-yellow);">GADGETS</a>
+            <a href="category-future.html" class="nav-link">FUTURE</a>
+            <a href="index.html#subscribe" class="nav-link holographic-btn">SUBSCRIBE</a>
+        </div>
+    </nav>
+
+    <section class="gadgets-hero">
+        <div class="gadgets-left">
+            <span class="gadgets-label">◆ HARDWARE & DEVICES</span>
+            <h1 class="gadgets-title">GAD<br><span class="outline">GETS</span></h1>
+            <p class="gadgets-subtitle">The latest devices, wearables, and hardware innovations that are redefining how we interact with technology.</p>
+            <div class="featured-list">
+                <div class="featured-item">
+                    <span class="featured-number">01</span>
+                    <span class="featured-text">VR Headsets & Neural Interfaces</span>
+                </div>
+                <div class="featured-item">
+                    <span class="featured-number">02</span>
+                    <span class="featured-text">Smart Wearables & Fabrics</span>
+                </div>
+                <div class="featured-item">
+                    <span class="featured-number">03</span>
+                    <span class="featured-text">Audio & Display Technology</span>
+                </div>
+            </div>
+        </div>
+        <div class="gadgets-right">
+            <div class="orbit-ring"></div>
+            <div class="orbit-ring"></div>
+            <div class="orbit-ring"></div>
+            <div class="floating-device"></div>
+        </div>
+    </section>
+
+    <section class="articles-section">
+        <div class="section-header">
+            <h2 class="section-title">ALL GADGETS</h2>
+            <span class="section-count">12 ARTICLES</span>
+        </div>
+        
+        <div class="masonry-grid">
+            <a href="article-vr-headset.html" class="card-link">
+                <article class="card card-large">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?w=800" alt="VR Headset">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">VR</span>
+                        <h2>VR 2.0: The Headset That Reads Your Mind</h2>
+                        <p>Next-gen virtual reality meets brain-computer interfaces.</p>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-smart-fabrics.html" class="card-link">
+                <article class="card card-medium">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=600" alt="Smart Fabric">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">WEARABLES</span>
+                        <h3>Smart Fabrics: Your Clothes Are Alive</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-translation-earbuds.html" class="card-link">
+                <article class="card card-small">
+                    <div class="card-content brutal-bg">
+                        <span class="tag">AUDIO</span>
+                        <h3>Real-Time Translation Earbuds</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-holograms.html" class="card-link">
+                <article class="card card-medium">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=600" alt="Hologram">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">DISPLAY</span>
+                        <h3>True Holograms: Screens Become Obsolete</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-biometrics.html" class="card-link">
+                <article class="card card-small">
+                    <div class="card-content brutal-bg-alt">
+                        <span class="tag">SECURITY</span>
+                        <h3>Biometric Everything: Passwords Are Dead</h3>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-brain-computer.html" class="card-link">
+                <article class="card card-large">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800" alt="Brain Interface">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">NEUROTECH</span>
+                        <h2>Brain-Computer Interfaces Go Wireless</h2>
+                        <p>The future of human-machine interaction is here.</p>
+                    </div>
+                </article>
+            </a>
+
+            <a href="article-neuralink-gaming.html" class="card-link">
+                <article class="card card-medium">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600" alt="Gaming">
+                        <div class="holographic-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="tag">GAMING</span>
+                        <h3>Neuralink Gaming: Play With Your Mind</h3>
+                    </div>
+                </article>
+            </a>
+
+            <article class="card card-small iridescent-card">
+                <div class="card-content">
+                    <span class="big-number">4.2B</span>
+                    <p>AR glasses shipped in 2025</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">NEXUS<span class="holographic">_</span></div>
+            <p>© 2025 NEXUS TECH MAGAZINE. ALL RIGHTS RESERVED.</p>
+        </div>
+        <div class="footer-grid-lines"></div>
+    </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('nav-open');
+            navToggle.classList.toggle('active');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+</body>
+</html>
