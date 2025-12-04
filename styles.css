@@ -595,6 +595,123 @@ body {
     }
 }
 
+/* Hamburger Menu Button */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger {
+    width: 24px;
+    height: 2px;
+    background: var(--text-white);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--text-white);
+    transition: all 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
+.nav-toggle.active .hamburger {
+    background: transparent;
+}
+
+.nav-toggle.active .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+    background: var(--accent-cyan);
+}
+
+.nav-toggle.active .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+    background: var(--accent-cyan);
+}
+
+/* Subscribe Section */
+.subscribe-section {
+    padding: 6rem 4rem;
+    background: var(--secondary-dark);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subscribe-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.subscribe-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.subscribe-text {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.subscribe-form {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.subscribe-input {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    background: var(--primary-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-white);
+    min-width: 300px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.subscribe-input:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+}
+
+.subscribe-input::placeholder {
+    color: var(--text-gray);
+}
+
+.subscribe-btn {
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
 @media (max-width: 600px) {
     .masonry-grid {
         grid-template-columns: 1fr;
@@ -610,8 +727,34 @@ body {
         font-size: 3.5rem;
     }
     
+    .nav-toggle {
+        display: flex;
+    }
+    
     .nav-links {
-        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(10, 10, 10, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-links.nav-open {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-links .nav-link {
+        font-size: 1.5rem;
+        letter-spacing: 0.2em;
     }
     
     .article-title {
@@ -620,5 +763,17 @@ body {
     
     .related-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .subscribe-section {
+        padding: 4rem 2rem;
+    }
+    
+    .subscribe-title {
+        font-size: 2.5rem;
+    }
+    
+    .subscribe-input {
+        min-width: 100%;
     }
 }
